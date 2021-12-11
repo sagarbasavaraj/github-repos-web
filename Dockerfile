@@ -2,12 +2,13 @@
 FROM node:alpine as build
 WORKDIR /app
 COPY package.json .
+COPY package-lock.json .
 RUN npm install
 COPY . .
-RUN npm build
+RUN npm run build
 
 # Start server by copying previous step build files
-FROM nginx
+FROM nginx:latest
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/github-repos-web /usr/share/nginx/html
 #heroku exposes port and these need to be used by nginx otherwise app will crash
