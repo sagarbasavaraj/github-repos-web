@@ -15,9 +15,6 @@ before_install:
   # Log in to heroku
   - docker login -u "$HEROKU_USERNAME" --password=$(heroku auth:token) registry.heroku.com
 
-install:
-  - docker build -t sagarbasavaraj/github-repos-web -f Dockerfile.dev .
-
 after_success:
   - docker build -t sagarbasavaraj/github-repos-web .
   - docker tag sagarbasavaraj/github-repos-web registry.heroku.com/$HEROKU_APP_NAME/web
