@@ -1,0 +1,19 @@
+<div *ngIf="repository" class="row pt-2 pb-2 mb-3 repository-item">
+  <div class="col-2">
+    <img class="avatar" src="{{ repository.avatar }}" alt="" />
+  </div>
+  <div class="col-10">
+    <div>
+      <h3 class="text-capitalize">{{ repository.name }}</h3>
+      <p>{{ repository.description }}</p>
+      <div class="repo-data-attributes">
+        <span class="badge rounded-pill bg-info text-dark">
+          Stars : {{ repository.stars }}
+        </span>
+        <span class="badge rounded-pill bg-danger">
+          Issues : {{ repository.issues }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

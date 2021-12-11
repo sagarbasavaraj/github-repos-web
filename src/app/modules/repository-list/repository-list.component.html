@@ -1,0 +1,12 @@
+<div class="container" infiniteScroll (scrolled)="onScroll()">
+  <app-toast
+    *ngIf="error"
+    (closeToast)="clearError()"
+    [message]="error"
+    title="Error"
+  ></app-toast>
+  <app-repository-item
+    *ngFor="let repository of repositories; let i = index"
+    [repository]="repository"
+  ></app-repository-item>
+</div>

@@ -1,0 +1,23 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { RepositoryListRoutingModule } from './repository-list-routing.module';
+import { RepositoryListComponent } from './repository-list.component';
+import { RepositoryItemComponent } from './components/repository-item/repository-item.component';
+import { ToastComponent } from '../../shared/components/toast/toast.component';
+
+@NgModule({
+  declarations: [
+    RepositoryListComponent,
+    RepositoryItemComponent,
+    ToastComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RepositoryListRoutingModule,
+    InfiniteScrollModule,
+  ],
+})
+export class RepositoryListModule {}

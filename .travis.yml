@@ -1,0 +1,26 @@
+sudo: required
+language: generic
+#branches to build
+branches:
+  only:
+    - master
+services:
+  - docker
+
+before_install:
+  # install heroku CLI
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  # Log in to the docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Log in to heroku
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+
+install:
+  - docker build -t sagarbasavaraj/github-repos-web -f Dockerfile.dev .
+
+after_success:
+  - docker build -t sagarbasavaraj/github-repos-web .
+  - docker tag sagarbasavaraj/github-repos-web registry.heroku.com/$HEROKU_APP_NAME/web
+  - docker push sagarbasavaraj/github-repos-web
+  - docker push registry.heroku.com/$HEROKU_APP_NAME/web
+  - heroku container:release web --app $HEROKU_APP_NAME

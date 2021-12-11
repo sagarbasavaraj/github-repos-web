@@ -1,0 +1,13 @@
+.repository-item {
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.repository-item .avatar {
+  width: 100%;
+}
+
+.repo-data-attributes {
+  display: flex;
+  gap: 0.5rem;
+}
