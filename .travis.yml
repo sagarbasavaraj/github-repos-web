@@ -13,7 +13,7 @@ before_install:
   # Log in to the docker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Log in to heroku
-  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+  - echo "$HEROKU_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin registry.heroku.com
 
 install:
   - docker build -t sagarbasavaraj/github-repos-web -f Dockerfile.dev .
