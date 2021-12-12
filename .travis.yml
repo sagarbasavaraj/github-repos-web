@@ -21,9 +21,12 @@ before_install:
   # Log in to heroku
   - docker login -u "$HEROKU_USERNAME" --password=$(heroku auth:token) registry.heroku.com
 
+install:
+  - docker build -t sagarbasavaraj/github-repos-web -f Dockerfile.dev .
+
 script:
   # build production image
-  - npm run test_headless
+  - docker run -e CI=true sagarbasavaraj/github-repos-web npm run test_headless
 
 after_success:
   - docker build -t sagarbasavaraj/github-repos-web .
