@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Repository } from './repository.model';
 import { map, catchError, throwError } from 'rxjs';
+import RepositoryUtils from './repository.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class RepositoryService {
   constructor(private http: HttpClient) {}
 
   getRepositories(page: number) {
-    let last_30_days = this.getDate();
+    const last_30_days = RepositoryUtils.getDate();
     let searchParams = new HttpParams();
     searchParams = searchParams
       .append('q', `created:>${last_30_days}`)
@@ -41,21 +42,5 @@ export class RepositoryService {
         return throwError(() => new Error(errorRes.message));
       })
     );
-  }
-
-  getDate() {
-    let date = new Date();
-    date = new Date(
-      new Date(date.setDate(date.getDate() - 30))
-        .toLocaleDateString()
-        .replace(/\//g, '-')
-    );
-    const year = date.getFullYear();
-    //if single digit append 0
-    //slice -2 ensures we take last 2 digit
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    const last_30_days = year + '-' + month + '-' + day;
-    return last_30_days;
   }
 }
