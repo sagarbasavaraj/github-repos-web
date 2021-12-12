@@ -38,8 +38,8 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true,
     customLaunchers: {
-      Chrome_travis_ci: {
-        base: "Chrome",
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
         flags: ["--no-sandbox"],
       },
     },
