@@ -6,6 +6,7 @@ branches:
     - main
 services:
   - docker
+  - xvfb
 
 before_install:
   # install heroku CLI
