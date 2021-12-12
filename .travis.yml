@@ -8,6 +8,9 @@ services:
   - docker
   - xvfb
 
+addons:
+  chrome: stable
+
 before_install:
   # install heroku CLI
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
@@ -18,12 +21,9 @@ before_install:
   # Log in to heroku
   - docker login -u "$HEROKU_USERNAME" --password=$(heroku auth:token) registry.heroku.com
 
-install:
-  - docker build -t sagarbasavaraj/github-repos-web -f Dockerfile.dev .
-
 script:
   # build production image
-  - docker run -e CI=true sagarbasavaraj/github-repos-web npm run test
+  - npm run test_headless
 
 after_success:
   - docker build -t sagarbasavaraj/github-repos-web .
