@@ -43,6 +43,6 @@ module.exports = function (config) {
         flags: ["--no-sandbox"],
       },
     },
-    ...(process.env.TRAVIS ? { browsers: ["Chrome_travis_ci"] } : {}),
+    ...(process.env.TRAVIS ? { browsers: ["ChromeHeadlessNoSandbox"] } : {}),
   });
 };
