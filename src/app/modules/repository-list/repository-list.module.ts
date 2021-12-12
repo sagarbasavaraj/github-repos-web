@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { RepositoryListRoutingModule } from './repository-list-routing.module';
 import { RepositoryListComponent } from './repository-list.component';
@@ -20,6 +21,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     RouterModule,
     RepositoryListRoutingModule,
     InfiniteScrollModule,
+    HttpClientModule,
   ],
 })
 export class RepositoryListModule {}
