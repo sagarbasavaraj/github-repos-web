@@ -48,7 +48,8 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 ## Development
 
-main branch is used for development. Ideally we should use feature branch like feature/<jira-ticket> for development and bugfix branch for defect fixing.
+Main branch is used for development.
+Ideally we should use feature branch like feature/<jira-ticket> for development and bugfix branch (bugfix/<jira-ticket>) for defect fixing.
 
 Code base is structured based on modules (ex. repository-list). All related files are grouped together and kept in one folder. In this way it is easy to find files and also helps others to understand the code base easily.
 
@@ -83,7 +84,7 @@ Travis CI is linked to github project github-repos-web and it listens on main br
 
 - Use SCSS or SASS instead of CSS
 - Write e2e test cases
-- Handling errors in more generic way
+- Handle errors in more generic way
 - State Mangement can be used (once app starts to grow like redux)
 - Avoid using more external libraries
 - UI design can be improved :-)
