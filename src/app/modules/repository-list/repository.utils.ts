@@ -1,14 +1,13 @@
 export default class RepositoryUtils {
-  //compute last 30 days and return
-  static getDate() {
-    const today = new Date();
-    today.setDate(today.getDate() - 30);
-    const date = new Date(today.toISOString().split('T')[0]);
-    const year = date.getFullYear();
-    //if single digit append 0
-    //slice -2 ensures we take last 2 digit
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    return year + '-' + month + '-' + day;
+  /**
+   * getLastThirtyDaysFromGivenDate - Computes last 30 days from given date. if from date is null or undefined default is today's date.
+   * @param fromDate - last 30 days from this date.
+   * @returns date last 30 days from given date.
+   */
+  static getLastThirtyDaysFromGivenDate(fromDate?: string) {
+    const currentDate = new Date(fromDate || new Date());
+    currentDate.setDate(currentDate.getDate() - 30);
+    const date = currentDate.toISOString().split('T')[0];
+    return date;
   }
 }

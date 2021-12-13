@@ -1,1 +1,1 @@
-## This folder contains all core functionalities of app like auth, request and error interceptors
+## This folder contains all core functionalities of app like auth, request and error interceptors, common services. Core module is not created for this assignment but we should have this as project grows. If module is created make sure it is imported only once.

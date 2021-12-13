@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+import { ApiService } from '../../core/services/api.service';
 import { Repository } from './repository.model';
-import { map, catchError, throwError } from 'rxjs';
+import { map, catchError, throwError, Observable } from 'rxjs';
 import RepositoryUtils from './repository.utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RepositoryService {
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService) {}
 
-  getRepositories(page: number) {
-    const last_30_days = RepositoryUtils.getDate();
+  /**
+   * getRepositories - Fetches list of most starred Github repos that were created in the last 30 days
+   * @param page Current page
+   * @returns Observable<Repository[]> list of repositories
+   */
+  getRepositories(page: number): Observable<Repository[]> {
+    const date = RepositoryUtils.getLastThirtyDaysFromGivenDate();
     let searchParams = new HttpParams();
     searchParams = searchParams
-      .append('q', `created:>${last_30_days}`)
+      .append('q', `created:>${date}`)
       .append('accept', 'application/vnd.github.v3+json')
       .append('sort', 'stars')
       .append('order', 'desc')
       .append('page', page);
     const url = 'https://api.github.com/search/repositories';
 
-    return this.http.get(url, { params: searchParams }).pipe(
+    return this.apiService.get(url, searchParams).pipe(
       map((responseData: any) => {
         const repositories: Repository[] = [];
         for (const repo of responseData.items) {
@@ -39,7 +45,7 @@ export class RepositoryService {
         return repositories;
       }),
       catchError((errorRes) => {
-        return throwError(() => new Error(errorRes.message));
+        return throwError(() => errorRes);
       })
     );
   }
